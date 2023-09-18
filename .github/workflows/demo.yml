@@ -1,0 +1,61 @@
+name: Simple CI/CD Demonstration
+
+on: [push]
+
+jobs:
+  build:
+    name: Build Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Print Current Branch
+        run: |
+          echo "Current branch is: $(git rev-parse --abbrev-ref HEAD)"
+
+      - name: Echo Build Step
+        run: |
+          echo "Starting the build process..."
+          echo "Compiling source code..."
+          echo "Build completed successfully!"
+
+  test:
+    name: Test Job
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Print Current Branch
+        run: |
+          echo "Current branch is: $(git rev-parse --abbrev-ref HEAD)"
+          echo "Triggered on push"
+
+      - name: Echo Test Step
+        run: |
+          echo "Starting the testing process..."
+          echo "Running unit tests..."
+          echo "All tests passed successfully!"
+
+  deploy:
+    name: Deploy Job
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Print Current Branch
+        run: |
+          echo "Current branch is: $(git rev-parse --abbrev-ref HEAD)"
+
+      - name: Echo Deploy Step
+        run: |
+          echo "Starting the deployment process..."
+          echo "Deploying to the server..."
+          echo "Deployment completed successfully!"
