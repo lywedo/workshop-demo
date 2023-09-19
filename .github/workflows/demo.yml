@@ -40,6 +40,7 @@ jobs:
           echo "Starting the testing process..."
           echo "Running unit tests..."
           echo "All tests passed successfully!"
+          echo "new workflow"
 
   deploy:
     name: Deploy Job
